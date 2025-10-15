@@ -8,7 +8,7 @@ const map = new maplibregl.Map({
     container: 'mijnkaart', 
     style: "https://tiles.openfreemap.org/styles/liberty", 
     center: [5.659555,51.478541], 
-    zoom: 17 // starting zoom
+    zoom: 25 // starting zoom
 });
 
 map.on('load', () => {
