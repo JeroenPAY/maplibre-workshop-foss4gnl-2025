@@ -12,7 +12,7 @@ const map = new maplibregl.Map({
 });
 
 map.on('load', () => {
-    fetch('wandeling.geojson')
+    fetch('assets/wandeling.geojson')
         .then(response => response.json())
         .then(data => {
             map.addSource('wandeling', {
