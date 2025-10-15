@@ -1,0 +1,919 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2025-10-15T19:47:30Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/7144714",
+        "highway": "unclassified",
+        "lanes": "2",
+        "maxspeed": "50",
+        "name": "Havenweg",
+        "sidewalk": "both",
+        "surface": "asphalt",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6520243,
+            51.4799229
+          ],
+          [
+            5.6522639,
+            51.4799246
+          ],
+          [
+            5.6526181,
+            51.4799317
+          ],
+          [
+            5.652926,
+            51.4799379
+          ],
+          [
+            5.6530469,
+            51.479964
+          ],
+          [
+            5.6530745,
+            51.47997
+          ],
+          [
+            5.653489,
+            51.4801313
+          ]
+        ]
+      },
+      "id": "way/7144714"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/7144752",
+        "foot": "yes",
+        "highway": "cycleway",
+        "lit": "yes",
+        "name": "Havenweg",
+        "oneway": "no",
+        "segregated": "no",
+        "smoothness": "excellent",
+        "surface": "paving_stones",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6518991,
+            51.4790312
+          ],
+          [
+            5.651905,
+            51.4790789
+          ],
+          [
+            5.6518908,
+            51.4793746
+          ],
+          [
+            5.6520097,
+            51.4795256
+          ],
+          [
+            5.6520616,
+            51.4796374
+          ],
+          [
+            5.6520489,
+            51.4798708
+          ],
+          [
+            5.6520447,
+            51.4798973
+          ],
+          [
+            5.6520243,
+            51.4799229
+          ]
+        ]
+      },
+      "id": "way/7144752"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/7144762",
+        "highway": "unclassified",
+        "lanes": "2",
+        "maxspeed": "50",
+        "name": "Watermolenwal",
+        "sidewalk": "both",
+        "surface": "paving_stones",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6536407,
+            51.4801985
+          ],
+          [
+            5.6537184,
+            51.480235
+          ],
+          [
+            5.6537921,
+            51.4803246
+          ],
+          [
+            5.653822,
+            51.4804422
+          ],
+          [
+            5.653829,
+            51.4805494
+          ]
+        ]
+      },
+      "id": "way/7144762"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/7144833",
+        "highway": "cycleway",
+        "lit": "yes",
+        "name": "Kasteelplein",
+        "oneway": "no",
+        "smoothness": "good",
+        "surface": "sett",
+        "width": "0",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6519453,
+            51.4775766
+          ],
+          [
+            5.6520274,
+            51.4775781
+          ]
+        ]
+      },
+      "id": "way/7144833"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/7144929",
+        "highway": "unclassified",
+        "lanes": "2",
+        "maxspeed": "50",
+        "name": "Watermolenwal",
+        "sidewalk": "both",
+        "surface": "paving_stones",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.653829,
+            51.4805494
+          ],
+          [
+            5.6538358,
+            51.4807447
+          ]
+        ]
+      },
+      "id": "way/7144929"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/26240796",
+        "cycleway:left": "no",
+        "cycleway:right": "shared_lane",
+        "cycleway:right:lane": "pictogram",
+        "highway": "unclassified",
+        "lane_markings": "no",
+        "maxspeed": "30",
+        "name": "Kasteellaan",
+        "oneway": "yes",
+        "oneway:bicycle": "no",
+        "sidewalk": "both",
+        "smoothness": "intermediate",
+        "surface": "sett",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6519293,
+            51.478179
+          ],
+          [
+            5.65193,
+            51.47815
+          ],
+          [
+            5.6519453,
+            51.4775766
+          ]
+        ]
+      },
+      "id": "way/26240796"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/27249390",
+        "highway": "cycleway",
+        "lit": "yes",
+        "mofa": "designated",
+        "moped": "no",
+        "name": "Marktstraat",
+        "oneway": "no",
+        "sidewalk": "right",
+        "surface": "paving_stones",
+        "traffic_sign": "NL:G11",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6575819,
+            51.4812511
+          ],
+          [
+            5.6579255,
+            51.4816684
+          ],
+          [
+            5.6580026,
+            51.4818037
+          ],
+          [
+            5.6580205,
+            51.4818289
+          ],
+          [
+            5.6580507,
+            51.4818513
+          ],
+          [
+            5.6580972,
+            51.4818628
+          ],
+          [
+            5.6581454,
+            51.4818721
+          ],
+          [
+            5.658171,
+            51.4818848
+          ],
+          [
+            5.6581941,
+            51.4818962
+          ],
+          [
+            5.6582282,
+            51.4819128
+          ],
+          [
+            5.6583088,
+            51.4819535
+          ],
+          [
+            5.658361,
+            51.481983
+          ],
+          [
+            5.6583812,
+            51.4819982
+          ]
+        ]
+      },
+      "id": "way/27249390"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/107054707",
+        "highway": "cycleway",
+        "name": "Kasteellaan",
+        "oneway": "no",
+        "smoothness": "excellent",
+        "surface": "paving_stones",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6519058,
+            51.4785488
+          ],
+          [
+            5.6518991,
+            51.4790312
+          ]
+        ]
+      },
+      "id": "way/107054707"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/107058215",
+        "highway": "cycleway",
+        "name": "Watermolenwal",
+        "oneway": "yes",
+        "sidewalk": "right",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6537616,
+            51.4808726
+          ],
+          [
+            5.6537555,
+            51.4808492
+          ],
+          [
+            5.653764,
+            51.4808315
+          ],
+          [
+            5.6538358,
+            51.4807447
+          ]
+        ]
+      },
+      "id": "way/107058215"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/143258780",
+        "highway": "cycleway",
+        "mofa": "designated",
+        "moped": "no",
+        "name": "Binderseind",
+        "oneway": "yes",
+        "traffic_sign": "NL:G11",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6584856,
+            51.4824026
+          ],
+          [
+            5.6584451,
+            51.4823588
+          ],
+          [
+            5.6583485,
+            51.4821772
+          ],
+          [
+            5.6583263,
+            51.4821259
+          ],
+          [
+            5.6583345,
+            51.4820945
+          ],
+          [
+            5.6583388,
+            51.4820678
+          ],
+          [
+            5.6583812,
+            51.4819982
+          ]
+        ]
+      },
+      "id": "way/143258780"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/294851329",
+        "highway": "cycleway",
+        "lit": "yes",
+        "mofa": "designated",
+        "moped": "no",
+        "name": "Marktstraat",
+        "oneway": "no",
+        "sidewalk": "right",
+        "surface": "paving_stones",
+        "traffic_sign": "NL:G11",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6573913,
+            51.4812556
+          ],
+          [
+            5.6571488,
+            51.4809699
+          ],
+          [
+            5.6571356,
+            51.480955
+          ]
+        ]
+      },
+      "id": "way/294851329"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/356260970",
+        "highway": "cycleway",
+        "mofa": "designated",
+        "moped": "no",
+        "name": "Binderseind",
+        "traffic_sign": "NL:G11",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6585441,
+            51.4825388
+          ],
+          [
+            5.6585121,
+            51.4824588
+          ],
+          [
+            5.6584926,
+            51.4824189
+          ],
+          [
+            5.6584856,
+            51.4824026
+          ]
+        ]
+      },
+      "id": "way/356260970"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/590501884",
+        "cycleway:both": "shared_lane",
+        "cycleway:both:lane": "pictogram",
+        "highway": "unclassified",
+        "maxspeed": "30",
+        "name": "Kasteellaan",
+        "sidewalk": "both",
+        "surface": "paving_stones",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6519236,
+            51.4784242
+          ],
+          [
+            5.6519058,
+            51.4785488
+          ]
+        ]
+      },
+      "id": "way/590501884"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/721866787",
+        "highway": "unclassified",
+        "lane_markings": "no",
+        "maxheight": "default",
+        "maxspeed": "30",
+        "name": "Kasteellaan",
+        "oneway": "yes",
+        "oneway:bicycle": "no",
+        "sidewalk": "both",
+        "surface": "sett",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6519236,
+            51.4784242
+          ],
+          [
+            5.6519293,
+            51.478179
+          ]
+        ]
+      },
+      "id": "way/721866787"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/732580608",
+        "highway": "unclassified",
+        "maxspeed": "50",
+        "name": "Havenweg",
+        "sidewalk": "both",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.653489,
+            51.4801313
+          ],
+          [
+            5.6536407,
+            51.4801985
+          ]
+        ]
+      },
+      "id": "way/732580608"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/761599981",
+        "highway": "cycleway",
+        "lit": "yes",
+        "name": "Watermolenwal",
+        "oneway": "no",
+        "sidewalk": "right",
+        "surface": "paving_stones",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6549673,
+            51.4815393
+          ],
+          [
+            5.6544975,
+            51.4813384
+          ],
+          [
+            5.6541383,
+            51.4812154
+          ],
+          [
+            5.6540652,
+            51.4811888
+          ],
+          [
+            5.6539788,
+            51.4811526
+          ],
+          [
+            5.6539271,
+            51.4811158
+          ]
+        ]
+      },
+      "id": "way/761599981"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1307905240",
+        "highway": "cycleway",
+        "lit": "yes",
+        "mofa": "designated",
+        "moped": "no",
+        "name": "Watermolenwal",
+        "oneway": "no",
+        "sidewalk": "right",
+        "surface": "paving_stones",
+        "traffic_sign": "NL:G11",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6571356,
+            51.480955
+          ],
+          [
+            5.6569774,
+            51.481005
+          ],
+          [
+            5.6561441,
+            51.4812807
+          ]
+        ]
+      },
+      "id": "way/1307905240"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1307905245",
+        "construction": "cycleway",
+        "highway": "construction",
+        "lit": "yes",
+        "name": "Watermolenwal",
+        "oneway": "no",
+        "sidewalk": "right",
+        "surface": "paving_stones",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6561441,
+            51.4812807
+          ],
+          [
+            5.6558423,
+            51.4813828
+          ],
+          [
+            5.6556737,
+            51.4814307
+          ],
+          [
+            5.6553714,
+            51.4814959
+          ],
+          [
+            5.6552158,
+            51.4815294
+          ],
+          [
+            5.6551216,
+            51.4815481
+          ],
+          [
+            5.6550309,
+            51.4815493
+          ],
+          [
+            5.6549673,
+            51.4815393
+          ]
+        ]
+      },
+      "id": "way/1307905245"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1320036385",
+        "crossing": "uncontrolled",
+        "crossing:island": "no",
+        "crossing:markings": "dashes",
+        "cycleway": "crossing",
+        "highway": "cycleway",
+        "lit": "yes",
+        "mofa": "designated",
+        "moped": "no",
+        "name": "Marktstraat",
+        "oneway": "no",
+        "sidewalk": "right",
+        "surface": "paving_stones",
+        "tactile_paving": "no",
+        "traffic_sign": "NL:G11",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6575819,
+            51.4812511
+          ],
+          [
+            5.6575424,
+            51.4812035
+          ],
+          [
+            5.6574675,
+            51.4812307
+          ],
+          [
+            5.6573913,
+            51.4812556
+          ]
+        ]
+      },
+      "id": "way/1320036385"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1378064300",
+        "highway": "cycleway",
+        "lit": "yes",
+        "name": "Watermolenwal",
+        "oneway": "no",
+        "sidewalk": "right",
+        "surface": "paving_stones",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6539271,
+            51.4811158
+          ],
+          [
+            5.653876,
+            51.4810768
+          ],
+          [
+            5.6538277,
+            51.4810233
+          ],
+          [
+            5.6537821,
+            51.480944
+          ],
+          [
+            5.6537616,
+            51.4808726
+          ]
+        ]
+      },
+      "id": "way/1378064300"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1434304429",
+        "highway": "cycleway",
+        "mofa": "designated",
+        "moped": "no",
+        "name": "Binderseind",
+        "traffic_sign": "NL:G11",
+        "zone:traffic": "NL:urban"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            5.6585616,
+            51.4825749
+          ],
+          [
+            5.6585441,
+            51.4825388
+          ]
+        ]
+      },
+      "id": "way/1434304429"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/259036566",
+        "highway": "traffic_signals",
+        "traffic_signals:direction": "forward"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6584926,
+          51.4824189
+        ]
+      },
+      "id": "node/259036566"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/331313329",
+        "expected_rwn_route_relations": "3",
+        "network:type": "node_network",
+        "rwn_ref": "47"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6520274,
+          51.4775781
+        ]
+      },
+      "id": "node/331313329"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/334638818",
+        "barrier": "bollard"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6520489,
+          51.4798708
+        ]
+      },
+      "id": "node/334638818"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/1567742690",
+        "network:type": "node_network",
+        "rcn_ref": "79"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6584856,
+          51.4824026
+        ]
+      },
+      "id": "node/1567742690"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/13183417653",
+        "highway": "traffic_signals",
+        "traffic_signals:direction": "forward"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.658171,
+          51.4818848
+        ]
+      },
+      "id": "node/13183417653"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/13183417654",
+        "highway": "traffic_signals",
+        "traffic_signals:direction": "backward"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.658361,
+          51.481983
+        ]
+      },
+      "id": "node/13183417654"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/13183417662",
+        "network:type": "node_network",
+        "rwn_ref": "44"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.6585616,
+          51.4825749
+        ]
+      },
+      "id": "node/13183417662"
+    }
+  ]
+}
