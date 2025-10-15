@@ -30,4 +30,27 @@ map.on('load', () => {
                 }
             });
         });
+
+    fetch('https://api.ndw.nu/api/rest/static-road-data/roadworks')
+  .then(r => r.json())
+  .then(data => {
+    map.addSource('ndw', {
+      type: 'geojson',
+      data: data
+    });
+
+    map.addLayer({
+      id: 'ndw-points',
+      type: 'circle',
+      source: 'ndw',
+      paint: {
+        'circle-radius': 6,
+        'circle-color': '#e63946',
+        'circle-stroke-width': 1,
+        'circle-stroke-color': '#fff'
+      }
+    });
+  });
+
 });
+
