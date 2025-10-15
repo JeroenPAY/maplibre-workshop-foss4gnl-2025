@@ -10,3 +10,24 @@ const map = new maplibregl.Map({
     center: [5.659555,51.478541], 
     zoom: 17 // starting zoom
 });
+
+map.on('load', () => {
+    fetch('wandeling.geojson')
+        .then(response => response.json())
+        .then(data => {
+            map.addSource('wandeling', {
+                type: 'geojson',
+                data: data
+            });
+
+            map.addLayer({
+                id: 'wandeling-laag',
+                type: 'line',
+                source: 'wandeling',
+                paint: {
+                    'line-color': '#FF0000',
+                    'line-width': 4
+                }
+            });
+        });
+});
