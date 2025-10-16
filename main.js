@@ -32,5 +32,74 @@ map.on("load", () => {
       });
     });
 
-  
+  // --- 2. NDW wegwerkzaamheden ophalen (XML → GeoJSON) ---
+  fetch("https://api.ndw.nu/api/rest/static-road-data/roadworks")
+    .then(r => r.text())
+    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+    .then(xml => {
+      const features = [];
+      const situations = xml.getElementsByTagName("situation");
+
+      for (let s = 0; s < situations.length; s++) {
+        const situation = situations[s];
+        const loc = situation.getElementsByTagName("locationForDisplay")[0];
+        if (!loc) continue;
+
+        const lat = parseFloat(loc.getElementsByTagName("latitude")[0]?.textContent);
+        const lon = parseFloat(loc.getElementsByTagName("longitude")[0]?.textContent);
+
+        const description = situation.getElementsByTagName("description")[0]?.textContent || "Geen beschrijving";
+        const id = situation.getAttribute("id") || `ndw-${s}`;
+
+        if (!isNaN(lat) && !isNaN(lon)) {
+          features.push({
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [lon, lat]
+            },
+            properties: {
+              id,
+              description
+            }
+          });
+        }
+      }
+
+      const geojson = { type: "FeatureCollection", features };
+
+      // --- NDW bron en laag toevoegen ---
+      map.addSource("ndw", { type: "geojson", data: geojson });
+      map.addLayer({
+        id: "ndw-points",
+        type: "circle",
+        source: "ndw",
+        paint: {
+          "circle-radius": 6,
+          "circle-color": "#e63946",
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "#fff"
+        }
+      });
+
+      // --- Popups bij klik ---
+      map.on("click", "ndw-points", (e) => {
+        const props = e.features[0].properties;
+        new maplibregl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <h3>Wegwerkzaamheden</h3>
+            <p>${props.description}</p>
+          `)
+          .addTo(map);
+      });
+
+      // Cursor veranderen bij hover
+      map.on("mouseenter", "ndw-points", () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", "ndw-points", () => {
+        map.getCanvas().style.cursor = "";
+      });
+    });
 });
