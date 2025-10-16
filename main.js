@@ -8,7 +8,7 @@ maplibregl.addProtocol("pmtiles", protocol.tile);
 // --- Kaart aanmaken ---
 const map = new maplibregl.Map({
   container: "mijnkaart",
-  style: "https://tiles.openfreemap.org/styles/liberty", 
+  style: "https://osm.cyclemap.nl/styles/osm-bright/style.json", 
   center: [5.659555, 51.478541], 
   zoom: 15
 });
