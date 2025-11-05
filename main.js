@@ -16,7 +16,7 @@ const map = new maplibregl.Map({
 
 // --- Data laden en omzetten zodra kaart klaar is ---
 map.on("load", () => {
-  fetch("assets/Helmond_rijrichting.geojson")
+  fetch("assets/rijrichting_helmond_4326.geojson")
     .then(response => response.json())
     .then(data => {
       // Zet RD-coördinaten om naar WGS84
@@ -49,7 +49,7 @@ map.on("load", () => {
             ["get", "fietsrr"],
             "H", "#00FF00",   // Groen
             "T", "#00FF00",   // Groen
-            "B", "#0000FF",   // Blauw
+            "B", "#00FF00",   // Blauw
             "G", "#FF0000",   // Rood
             "O", "#FFA600",   // Oranje
             "#FF9900"         // Default
