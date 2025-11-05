@@ -16,7 +16,7 @@ const map = new maplibregl.Map({
 
 // --- Data laden en omzetten zodra kaart klaar is ---
 map.on("load", () => {
-  fetch("assets/3857_helmond_rr.geojson")
+  fetch("assets/28992_Helmond_rr.geojson")
     .then(response => response.json())
     .then(data => {
       // Zet RD-coördinaten om naar WGS84
