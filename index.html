@@ -1,22 +1,33 @@
 <!doctype html>
-<html>
+<html lang="nl">
   <head>
-    <title>Mijn titel</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Helmond Rijrichting Kaart</title>
+
+    <!-- MapLibre CSS -->
+    <link
+      href="https://cdn.skypack.dev/maplibre-gl/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #mijnkaart {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
   </head>
-  <style>
-  @import url("https://esm.sh/maplibre-gl/dist/maplibre-gl.css");
 
-  body {
-    margin: 0;
-  }
-
-  #mijnkaart {
-    width: 100vw;
-    height: 100vh;
-  }
-</style>
   <body>
     <div id="mijnkaart"></div>
+
+    <!-- Je hoofdscript -->
     <script type="module" src="main.js"></script>
   </body>
 </html>
