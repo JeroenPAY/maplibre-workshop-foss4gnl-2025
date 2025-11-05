@@ -1,43 +1,69 @@
+// main.js
 import * as maplibregl from "https://cdn.skypack.dev/maplibre-gl";
-import { Protocol } from "https://esm.sh/pmtiles";
+import proj4 from "https://cdn.skypack.dev/proj4";
 
-// --- PMTiles protocol setup ---
-const protocol = new Protocol();
-maplibregl.addProtocol("pmtiles", protocol.tile);
+// --- Projectiedefinities (RD naar WGS84) ---
+const rd = "+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +units=m +no_defs";
+const wgs84 = "+proj=longlat +datum=WGS84 +no_defs";
 
 // --- Kaart aanmaken ---
 const map = new maplibregl.Map({
-  container: "mijnkaart",
-  style: "https://tiles.openfreemap.org/styles/liberty",
-  center: [5.659555, 51.478541],
-  zoom: 15
+  container: "mijnkaart", // HTML-element ID
+  style: "https://tiles.openfreemap.org/styles/liberty", // OpenFreemap stijl
+  center: [5.659555, 51.478541], // Helmond
+  zoom: 13
 });
 
-// --- Laad data zodra kaart klaar is ---
+// --- Data laden en omzetten zodra kaart klaar is ---
 map.on("load", () => {
   fetch("assets/Helmond_rijrichting.geojson")
     .then(response => response.json())
     .then(data => {
-      map.addSource("helmond", { type: "geojson", data });
+      // Zet RD-coördinaten om naar WGS84
+      data.features.forEach(feature => {
+        if (feature.geometry.type === "MultiLineString") {
+          feature.geometry.coordinates = feature.geometry.coordinates.map(line =>
+            line.map(coord => proj4(rd, wgs84, coord))
+          );
+        } else if (feature.geometry.type === "LineString") {
+          feature.geometry.coordinates = feature.geometry.coordinates.map(coord =>
+            proj4(rd, wgs84, coord)
+          );
+        }
+      });
 
+      // GeoJSON toevoegen als bron
+      map.addSource("helmond", {
+        type: "geojson",
+        data: data
+      });
+
+      // Lijnlaag toevoegen met kleur per "fietsrr"
       map.addLayer({
         id: "helmond-laag",
         type: "line",
         source: "helmond",
         paint: {
-          // Kleur per categorie
           "line-color": [
             "match",
-            ["get", "fietsrr"], // veldnaam in je GeoJSON
-            "H", "#FF0000",     // rood
-            "T", "#00FF00",     // groen
-            "B", "#0000FF",     // blauw
-            "G", "#FFFF00",     // geel
-            "O", "#FF00FF",     // magenta
-            "#AAAAAA"           // default (voor null of onbekend)
+            ["get", "fietsrr"],
+            "H", "#00FF00",   // Groen
+            "T", "#00FF00",   // Groen
+            "B", "#0000FF",   // Blauw
+            "G", "#FF0000",   // Rood
+            "O", "#FFA600",   // Oranje
+            "#FF9900"         // Default
           ],
-          "line-width": 2
+          "line-width": 3
         }
       });
-    });
+
+      // Zoom automatisch naar de data
+      const bounds = new maplibregl.LngLatBounds();
+      data.features.forEach(f => {
+        f.geometry.coordinates.flat().forEach(coord => bounds.extend(coord));
+      });
+      map.fitBounds(bounds, { padding: 50 });
+    })
+    .catch(err => console.error("Fout bij laden GeoJSON:", err));
 });
