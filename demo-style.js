@@ -1,10 +1,10 @@
-{
+demoStyle = {
     "version": 8,
-    "name": "NDW Modular Basic background map",
+    "name": "DEMO NDW Modular Basic background map",
     "owner": "NDW Location Services",
     "metadata": {
         "title": "Modulaire achtergrondkaart NDW",
-        "desc": "Een stijl bestand, met daarin verschillende gegroepeerde stijl lagen, die geconfigureerd kunnen worden door de ontwikkelaar naar wens en behoefte van de applicatie. Waarin opvallende (relevant) en onopvallende (context) informatie lagen visueel getoond kunnen worden in combinatie met eigen informatie lagen om zo het beste beeld te creëren.",
+        "desc": "Een demo stijl bestand, met daarin verschillende gegroepeerde stijl lagen, die geconfigureerd kunnen worden door de ontwikkelaar naar wens en behoefte van de applicatie. Waarin opvallende (relevant) en onopvallende (context) informatie lagen visueel getoond kunnen worden in combinatie met eigen informatie lagen om zo het beste beeld te creëren. Deze stijl bevat enkele thematische visualisatie lagen ter demo. Deze maken geen onderdeel uit van de standaard kaart.",
         "design": "This Way Cartography; Niene Boeijen"
     },
     "center": [
@@ -28,6 +28,11 @@
     ],
     "glyphs": "https://maps.ndw.nu/styles/glyphs/{fontstack}/{range}.pbf",
     "sources": {
+        "osm": {
+            "type": "vector",
+            "url": "https://maps.ndw.nu/api/v1/osm/latest/mbtiles/osm/",
+            "attribution": "OSM"
+        },
         "pdok_luchtfoto": {
             "type": "raster",
             "tiles": [
@@ -82,6 +87,28 @@
         "ndw_wkdParkingAreas": {
             "type": "vector",
             "url": "https://maps.ndw.nu/api/v1/wkdParkingAreas/latest/mbtiles/segments/"
+        },
+        "ndw_wkdParkingPoints": {
+            "type": "vector",
+            "url": "https://maps.ndw.nu/api/v1/wkdParkingPoints/latest/mbtiles/segments/"
+        },
+        "ndw_trafficSigns": {
+            "type": "vector",
+            "tiles": [
+                "https://wegkenmerken.ndw.nu/api/tiles/data/traffic-signs/{z}/{x}/{y}.pbf"
+            ]
+        },
+        "ndw_wkdMedianStripWidths": {
+            "type": "vector",
+            "url": "https://maps.ndw.nu/api/v1/wkdMedianStripWidths/latest/mbtiles/segments/"
+        },
+        "ndw_wkdAxisOffsets": {
+            "type": "vector",
+            "url": "https://maps.ndw.nu/api/v1/wkdAxisOffsets/latest/mbtiles/segments/"
+        },
+        "ndw_wkdSpeedLimits": {
+            "type": "vector",
+            "url": "https://maps.ndw.nu/api/v1/wkdSpeedLimits/latest/mbtiles/segments/"
         }
     },
     "layers": [
@@ -2378,6 +2405,488 @@
             }
         },
         {
+            "id": "WKD-parking-points-rel",
+            "type": "symbol",
+            "source": "ndw_wkdParkingPoints",
+            "source-layer": "segments",
+            "metadata": {
+                "group": "relevant-roads",
+                "subGroup": "WKD-parking-points",
+                "type": "custom",
+                "legendName": "Parking areas",
+                "desc": "Parkeerplaatsen aangeduid met bord",
+                "insertBefore": "custom"
+            },
+            "minzoom": 11,
+            "layout": {
+                "visibility": "none",
+                "icon-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    11,
+                    0,
+                    12,
+                    0.2,
+                    14,
+                    0.2,
+                    20,
+                    0.4
+                ],
+                "icon-image": [
+                    "step",
+                    [
+                        "zoom"
+                    ],
+                    "custom:E4_3",
+                    10,
+                    "custom:E4_2",
+                    14,
+                    "custom:E4"
+                ],
+                "icon-allow-overlap": true
+            },
+            "paint": {
+                "text-color": "blue"
+            }
+        },
+        {
+            "id": "WKD-median-strip-widths",
+            "type": "line",
+            "source": "ndw_wkdMedianStripWidths",
+            "source-layer": "segments",
+            "metadata": {
+                "group": "relevant-data",
+                "subGroup": "NWB-road-sections",
+                "type": "custom",
+                "legendName": "Middenberm breedte",
+                "desc": "Specifieke set verkeersveiligheid",
+                "insertBefore": "custom"
+            },
+            "layout": {
+                "visibility": "none",
+                "line-cap": "butt",
+                "line-join": "round"
+            },
+            "paint": {
+                "line-dasharray": [
+                    0.2,
+                    0.2
+                ],
+                "line-offset": [
+                    "interpolate",
+                    [
+                        "exponential",
+                        1.2
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    10,
+                    -1,
+                    20,
+                    -20
+                ],
+                "line-width": [
+                    "interpolate",
+                    [
+                        "exponential",
+                        1.2
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    12,
+                    [
+                        "*",
+                        [
+                            "to-number",
+                            [
+                                "get",
+                                "width"
+                            ]
+                        ],
+                        0.2
+                    ],
+                    20,
+                    [
+                        "*",
+                        [
+                            "to-number",
+                            [
+                                "get",
+                                "width"
+                            ]
+                        ],
+                        1.15
+                    ]
+                ],
+                "line-color": [
+                    "match",
+                    [
+                        "get",
+                        "type"
+                    ],
+                    "medianStrip",
+                    "#1A85FF",
+                    "trafficIsland",
+                    "#D41159",
+                    "red"
+                ]
+            }
+        },
+        {
+            "id": "WKD-Axis-Offsets",
+            "type": "line",
+            "source": "ndw_wkdAxisOffsets",
+            "source-layer": "segments",
+            "metadata": {
+                "group": "relevant-data",
+                "subGroup": "NWB-road-sections",
+                "type": "custom",
+                "legendName": "As verspringingen, versmallingen",
+                "desc": "Specifieke set verkeersveiligheid",
+                "insertBefore": "custom"
+            },
+            "layout": {
+                "visibility": "none",
+                "line-cap": "butt",
+                "line-join": "round"
+            },
+            "filter": [
+                "has",
+                "type"
+            ],
+            "paint": {
+                "line-width": [
+                    "interpolate",
+                    [
+                        "exponential",
+                        1.1
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    10,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        3.5,
+                        "1",
+                        3.5,
+                        "2",
+                        3.5,
+                        "3",
+                        2.5,
+                        "4",
+                        2.5,
+                        "5",
+                        0,
+                        "6",
+                        0,
+                        0
+                    ],
+                    13,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        7.5,
+                        "1",
+                        6,
+                        "2",
+                        6,
+                        "3",
+                        6,
+                        "4",
+                        6,
+                        "5",
+                        4.5,
+                        "6",
+                        3.5,
+                        "7",
+                        1.5,
+                        0
+                    ],
+                    15,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        12.5,
+                        "1",
+                        12,
+                        "2",
+                        11,
+                        "3",
+                        9,
+                        "4",
+                        9,
+                        "5",
+                        8,
+                        "6",
+                        5,
+                        "7",
+                        3.5,
+                        0
+                    ],
+                    20,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        27,
+                        "1",
+                        27,
+                        "2",
+                        25,
+                        "3",
+                        23,
+                        "4",
+                        23,
+                        "5",
+                        22,
+                        "6",
+                        20,
+                        "7",
+                        10,
+                        0
+                    ]
+                ],
+                "line-dasharray": [
+                    0.2,
+                    0.2
+                ],
+                "line-color": [
+                    "match",
+                    [
+                        "get",
+                        "type"
+                    ],
+                    "narrowing",
+                    "#E66100",
+                    "axisOffset",
+                    "#D35FB7",
+                    "green"
+                ]
+            }
+        },
+        {
+            "id": "WKD-SpeedLimits",
+            "type": "line",
+            "source": "ndw_wkdSpeedLimits",
+            "source-layer": "segments",
+            "metadata": {
+                "group": "relevant-data",
+                "subGroup": "custom",
+                "legendName": "Maximum advies snelheid",
+                "type": "custom",
+                "desc": "",
+                "insertBefore": "custom"
+            },
+            "filter": [
+                "all",
+                [
+                    "!=",
+                    [
+                        "get",
+                        "speedLimit"
+                    ],
+                    "NVT"
+                ],
+                [
+                    "!=",
+                    [
+                        "get",
+                        "speedLimit"
+                    ],
+                    "onbekend"
+                ],
+                [
+                    "!=",
+                    [
+                        "get",
+                        "speedLimit"
+                    ],
+                    "NOA"
+                ]
+            ],
+            "layout": {
+                "visibility": "none",
+                "line-cap": "round",
+                "line-join": "round",
+                "line-sort-key": [
+                    "to-number",
+                    [
+                        "get",
+                        "speedLimit"
+                    ]
+                ]
+            },
+            "paint": {
+                "line-color": [
+                    "match",
+                    [
+                        "to-number",
+                        [
+                            "get",
+                            "speedLimit"
+                        ]
+                    ],
+                    5,
+                    "#ffba77",
+                    15,
+                    "#ff7f0e",
+                    20,
+                    "#97de89",
+                    30,
+                    "#2ca02c",
+                    40,
+                    "#bcbd22",
+                    50,
+                    "#9367bc",
+                    60,
+                    "#e377c1",
+                    70,
+                    "#d62727",
+                    80,
+                    "#cc4778",
+                    90,
+                    "#8c564a",
+                    100,
+                    "#0d0887",
+                    120,
+                    "#1e77b4",
+                    130,
+                    "#16becf",
+                    "transparent"
+                ],
+                "line-width": [
+                    "interpolate",
+                    [
+                        "exponential",
+                        1.1
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    10,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        2.5,
+                        "1",
+                        2.5,
+                        "2",
+                        2.5,
+                        "3",
+                        1.5,
+                        "4",
+                        1.5,
+                        "5",
+                        1,
+                        0
+                    ],
+                    13,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        6,
+                        "1",
+                        4,
+                        "2",
+                        4,
+                        "3",
+                        4.1,
+                        "4",
+                        4.1,
+                        "5",
+                        2.7,
+                        "6",
+                        1.5,
+                        "7",
+                        1.5,
+                        0
+                    ],
+                    15,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        10,
+                        "1",
+                        9.5,
+                        "2",
+                        8.4,
+                        "3",
+                        6.4,
+                        "4",
+                        6.4,
+                        "5",
+                        5.4,
+                        "6",
+                        4,
+                        "7",
+                        3.5,
+                        0
+                    ],
+                    20,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        24,
+                        "1",
+                        24,
+                        "2",
+                        22,
+                        "3",
+                        20,
+                        "4",
+                        18,
+                        "5",
+                        17,
+                        "6",
+                        15,
+                        "7",
+                        10,
+                        0
+                    ]
+                ]
+            }
+        },
+        {
             "id": "BRT-spoorbaanlijn",
             "type": "line",
             "source": "pdok_brt",
@@ -2769,6 +3278,246 @@
                     2,
                     16,
                     5
+                ]
+            }
+        },
+        {
+            "id": "NDW-AccessibleRoads",
+            "type": "line",
+            "source": "ndw_roadSections",
+            "source-layer": "roadSections",
+            "metadata": {
+                "group": "relevant-data",
+                "subGroup": "custom",
+                "legendName": "Bereikbaarheidskaart voorbeeld",
+                "type": "custom",
+                "desc": "",
+                "insertBefore": "custom"
+            },
+            "layout": {
+                "visibility": "none",
+                "line-cap": "round",
+                "line-join": "round",
+                "line-sort-key": [
+                    "-",
+                    8,
+                    [
+                        "to-number",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ]
+                    ]
+                ]
+            },
+            "paint": {
+                "line-color": [
+                    "match",
+                    [
+                        "get",
+                        "municipalityId"
+                    ],
+                    1948,
+                    [
+                        "case",
+                        [
+                            "any",
+                            [
+                                "==",
+                                [
+                                    "get",
+                                    "carriagewayTypeCode"
+                                ],
+                                "FP"
+                            ],
+                            [
+                                "==",
+                                [
+                                    "slice",
+                                    [
+                                        "get",
+                                        "carriagewayTypeCode"
+                                    ],
+                                    0,
+                                    2
+                                ],
+                                "VD"
+                            ]
+                        ],
+                        "#b6b8c3",
+                        [
+                            "all",
+                            [
+                                "==",
+                                [
+                                    "feature-state",
+                                    "forwardAccessible"
+                                ],
+                                false
+                            ],
+                            [
+                                "==",
+                                [
+                                    "feature-state",
+                                    "backwardAccessible"
+                                ],
+                                false
+                            ]
+                        ],
+                        "#d41159",
+                        [
+                            "all",
+                            [
+                                "==",
+                                [
+                                    "feature-state",
+                                    "forwardAccessible"
+                                ],
+                                true
+                            ],
+                            [
+                                "==",
+                                [
+                                    "feature-state",
+                                    "backwardAccessible"
+                                ],
+                                true
+                            ]
+                        ],
+                        "#d41159",
+                        "#8fc4ff"
+                    ],
+                    "transparent"
+                ],
+                "line-width": [
+                    "interpolate",
+                    [
+                        "exponential",
+                        1.1
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    10,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        2.5,
+                        "1",
+                        2.5,
+                        "2",
+                        2.5,
+                        "3",
+                        1.5,
+                        "4",
+                        1.5,
+                        "5",
+                        1,
+                        0
+                    ],
+                    13,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        6,
+                        "1",
+                        4,
+                        "2",
+                        4,
+                        "3",
+                        4.1,
+                        "4",
+                        4.1,
+                        "5",
+                        2.7,
+                        "6",
+                        1.5,
+                        "7",
+                        1.5,
+                        0
+                    ],
+                    15,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        10,
+                        "1",
+                        9.5,
+                        "2",
+                        8.4,
+                        "3",
+                        6.4,
+                        "4",
+                        6.4,
+                        "5",
+                        5.4,
+                        "6",
+                        4,
+                        "7",
+                        3.5,
+                        0
+                    ],
+                    20,
+                    [
+                        "match",
+                        [
+                            "get",
+                            "functionalRoadClass"
+                        ],
+                        "0",
+                        24,
+                        "1",
+                        24,
+                        "2",
+                        22,
+                        "3",
+                        20,
+                        "4",
+                        18,
+                        "5",
+                        17,
+                        "6",
+                        15,
+                        "7",
+                        10,
+                        0
+                    ]
+                ],
+                "line-opacity": [
+                    "match",
+                    [
+                        "get",
+                        "functionalRoadClass"
+                    ],
+                    "0",
+                    1,
+                    "1",
+                    1,
+                    "2",
+                    1,
+                    "3",
+                    1,
+                    "4",
+                    1,
+                    "5",
+                    1,
+                    "6",
+                    1,
+                    "7",
+                    0,
+                    0
                 ]
             }
         },
@@ -3194,6 +3943,775 @@
                 "text-color": "hsl(196, 13%, 29%)",
                 "text-halo-color": "#f8f4f0",
                 "text-halo-width": 1.5
+            }
+        },
+        {
+            "id": "OSM-pois-circle",
+            "type": "circle",
+            "source": "osm",
+            "source-layer": "poi",
+            "metadata": {
+                "group": "context-labels",
+                "subGroup": "OSM-pois-names",
+                "type": "context",
+                "legendName": "Points of interest cirkel uit OSM",
+                "desc": "Still in development",
+                "insertBefore": "label"
+            },
+            "minzoom": 15,
+            "filter": [
+                "all",
+                [
+                    "!=",
+                    "subclass",
+                    "station"
+                ],
+                [
+                    "!=",
+                    "subclass",
+                    "halt"
+                ],
+                [
+                    "!=",
+                    "subclass",
+                    "university"
+                ],
+                [
+                    "has",
+                    "name"
+                ]
+            ],
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "circle-color": [
+                    "match",
+                    [
+                        "get",
+                        "class"
+                    ],
+                    "fast_food",
+                    "#cbcdd9",
+                    "fuel",
+                    "#cbcdd9",
+                    "parking",
+                    "#cbcdd9",
+                    "waste_basket",
+                    "#cbcdd9",
+                    "restaurant",
+                    "#cbcdd9",
+                    "cafe",
+                    "#cbcdd9",
+                    "toilets",
+                    "#cbcdd9",
+                    "#cbcdd9"
+                ],
+                "circle-radius": 3
+            }
+        },
+        {
+            "id": "OSM-pois-3",
+            "type": "symbol",
+            "source": "osm",
+            "source-layer": "poi",
+            "metadata": {
+                "group": "context-labels",
+                "subGroup": "OSM-pois-names",
+                "type": "context",
+                "legendName": "Points of interest tekst uit OSM",
+                "desc": "Still in development",
+                "insertBefore": "label"
+            },
+            "minzoom": 16,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "$type",
+                    "Point"
+                ],
+                [
+                    ">=",
+                    "rank",
+                    25
+                ],
+                [
+                    "any",
+                    [
+                        "!has",
+                        "level"
+                    ],
+                    [
+                        "==",
+                        "level",
+                        0
+                    ]
+                ]
+            ],
+            "layout": {
+                "symbol-sort-key": [
+                    "get",
+                    "rank"
+                ],
+                "visibility": "none",
+                "icon-image": "sdf:{class}_11",
+                "text-field": "{name}",
+                "text-max-width": 9,
+                "text-font": [
+                    "Roboto Light"
+                ],
+                "text-offset": [
+                    0,
+                    0.6
+                ],
+                "text-padding": 2,
+                "text-rotation-alignment": "viewport",
+                "text-anchor": "top",
+                "text-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    15,
+                    10,
+                    20,
+                    12
+                ]
+            },
+            "paint": {
+                "icon-color": "#725f5d",
+                "text-color": "#a38985"
+            }
+        },
+        {
+            "id": "OSM-pois-2",
+            "type": "symbol",
+            "source": "osm",
+            "source-layer": "poi",
+            "metadata": {
+                "group": "context-labels",
+                "subGroup": "OSM-pois-names",
+                "type": "context",
+                "legendName": "Points of interest tekst uit OSM",
+                "desc": "Still in development",
+                "insertBefore": "label"
+            },
+            "minzoom": 15,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "$type",
+                    "Point"
+                ],
+                [
+                    "<=",
+                    "rank",
+                    24
+                ],
+                [
+                    ">=",
+                    "rank",
+                    15
+                ],
+                [
+                    "any",
+                    [
+                        "!has",
+                        "level"
+                    ],
+                    [
+                        "==",
+                        "level",
+                        0
+                    ]
+                ]
+            ],
+            "layout": {
+                "symbol-sort-key": [
+                    "get",
+                    "rank"
+                ],
+                "visibility": "none",
+                "icon-image": "sdf:{class}_11",
+                "text-field": "{name}",
+                "text-max-width": 9,
+                "text-font": [
+                    "Roboto Light"
+                ],
+                "text-offset": [
+                    0,
+                    0.6
+                ],
+                "text-padding": 2,
+                "text-rotation-alignment": "viewport",
+                "text-anchor": "top",
+                "text-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    15,
+                    10,
+                    20,
+                    12
+                ]
+            },
+            "paint": {
+                "icon-color": "#725f5d",
+                "text-color": "#a38985"
+            }
+        },
+        {
+            "id": "OSM-pois-1",
+            "type": "symbol",
+            "source": "osm",
+            "source-layer": "poi",
+            "metadata": {
+                "group": "context-labels",
+                "subGroup": "OSM-pois-names",
+                "type": "context",
+                "legendName": "Points of interest tekst uit OSM",
+                "desc": "Still in development",
+                "insertBefore": "label"
+            },
+            "minzoom": 14,
+            "filter": [
+                "all",
+                [
+                    "==",
+                    "$type",
+                    "Point"
+                ],
+                [
+                    "<=",
+                    "rank",
+                    24
+                ],
+                [
+                    "has",
+                    "name"
+                ],
+                [
+                    "any",
+                    [
+                        "!has",
+                        "level"
+                    ],
+                    [
+                        "==",
+                        "level",
+                        0
+                    ]
+                ],
+                [
+                    "!=",
+                    "subclass",
+                    "station"
+                ],
+                [
+                    "!=",
+                    "class",
+                    "bus"
+                ],
+                [
+                    "!=",
+                    "subclass",
+                    "halt"
+                ],
+                [
+                    "!=",
+                    "subclass",
+                    "university"
+                ]
+            ],
+            "layout": {
+                "symbol-sort-key": [
+                    "get",
+                    "rank"
+                ],
+                "visibility": "visible",
+                "icon-image": "sdf:{class}_11",
+                "text-field": "{name}",
+                "text-max-width": 9,
+                "text-font": [
+                    "Roboto Light"
+                ],
+                "text-offset": [
+                    0,
+                    0.6
+                ],
+                "text-padding": 2,
+                "text-rotation-alignment": "viewport",
+                "text-anchor": "top",
+                "text-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    15,
+                    10,
+                    20,
+                    12
+                ]
+            },
+            "paint": {
+                "icon-color": "#725f5d",
+                "text-color": "#a38985"
+            }
+        },
+        {
+            "id": "NDW-trafficSigns",
+            "type": "symbol",
+            "source": "ndw_trafficSigns",
+            "source-layer": "traffic-signs",
+            "metadata": {
+                "group": "relevant-data",
+                "subGroup": "traffic-signs",
+                "type": "custom",
+                "legendName": "Verkeersboren op RVV code",
+                "desc": "Still in development",
+                "insertBefore": "label"
+            },
+            "minzoom": 11,
+            "filter": [
+                "==",
+                [
+                    "get",
+                    "status"
+                ],
+                "PLACED"
+            ],
+            "layout": {
+                "visibility": "none",
+                "icon-allow-overlap": true,
+                "icon-overlap": "always",
+                "icon-ignore-placement": true,
+                "symbol-sort-key": [
+                    "slice",
+                    [
+                        "get",
+                        "rvv_code"
+                    ],
+                    0,
+                    1
+                ],
+                "icon-image": [
+                    "step",
+                    [
+                        "zoom"
+                    ],
+                    [
+                        "concat",
+                        "custom:",
+                        [
+                            "get",
+                            "rvv_code"
+                        ],
+                        "_3"
+                    ],
+                    11,
+                    [
+                        "concat",
+                        "custom:",
+                        [
+                            "get",
+                            "rvv_code"
+                        ],
+                        "_3"
+                    ],
+                    13.5,
+                    [
+                        "concat",
+                        "custom:",
+                        [
+                            "get",
+                            "rvv_code"
+                        ],
+                        "_2"
+                    ],
+                    18,
+                    [
+                        "concat",
+                        "custom:",
+                        [
+                            "get",
+                            "rvv_code"
+                        ],
+                        "_1"
+                    ]
+                ],
+                "icon-rotation-alignment": "map",
+                "icon-rotate": [
+                    "get",
+                    "location_bearing"
+                ],
+                "icon-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    11,
+                    [
+                        "case",
+                        [
+                            "==",
+                            [
+                                "slice",
+                                [
+                                    "get",
+                                    "rvv_code"
+                                ],
+                                0,
+                                1
+                            ],
+                            "D"
+                        ],
+                        0,
+                        [
+                            "==",
+                            [
+                                "slice",
+                                [
+                                    "get",
+                                    "rvv_code"
+                                ],
+                                0,
+                                1
+                            ],
+                            "E"
+                        ],
+                        0,
+                        [
+                            "==",
+                            [
+                                "get",
+                                "rvv_code"
+                            ],
+                            "A4"
+                        ],
+                        0,
+                        [
+                            "==",
+                            [
+                                "get",
+                                "rvv_code"
+                            ],
+                            "onbekend"
+                        ],
+                        0,
+                        0.8
+                    ],
+                    13,
+                    [
+                        "case",
+                        [
+                            "==",
+                            [
+                                "slice",
+                                [
+                                    "get",
+                                    "rvv_code"
+                                ],
+                                0,
+                                1
+                            ],
+                            "D"
+                        ],
+                        0,
+                        [
+                            "==",
+                            [
+                                "slice",
+                                [
+                                    "get",
+                                    "rvv_code"
+                                ],
+                                0,
+                                1
+                            ],
+                            "E"
+                        ],
+                        0,
+                        [
+                            "==",
+                            [
+                                "get",
+                                "rvv_code"
+                            ],
+                            "A4"
+                        ],
+                        0,
+                        [
+                            "==",
+                            [
+                                "get",
+                                "rvv_code"
+                            ],
+                            "onbekend"
+                        ],
+                        0,
+                        0.3
+                    ],
+                    15,
+                    [
+                        "case",
+                        [
+                            "==",
+                            [
+                                "get",
+                                "rvv_code"
+                            ],
+                            "onbekend"
+                        ],
+                        0,
+                        0.8
+                    ],
+                    18,
+                    0.6,
+                    20,
+                    1
+                ]
+            },
+            "paint": {
+                "text-color": "#000"
+            }
+        },
+        {
+            "id": "NDW-trafficSigns-bereikbaarheidskaart",
+            "type": "symbol",
+            "source": "ndw_trafficSigns",
+            "source-layer": "traffic-signs",
+            "metadata": {
+                "group": "relevant-data",
+                "subGroup": "traffic-signs",
+                "type": "custom",
+                "legendName": "Verkeersborden op RVV code voor bereikbaarheid",
+                "desc": "Still in development",
+                "insertBefore": "label"
+            },
+            "minzoom": 11,
+            "filter": [
+                "all",
+                [
+                    "in",
+                    [
+                        "get",
+                        "rvv_code"
+                    ],
+                    [
+                        "literal",
+                        [
+                            "C1",
+                            "C2",
+                            "C3",
+                            "C6",
+                            "C12",
+                            "C17",
+                            "C18",
+                            "C19",
+                            "C20",
+                            "C21",
+                            "C22a",
+                            "C22b",
+                            "C7",
+                            "C7b",
+                            "C22c",
+                            "C22d"
+                        ]
+                    ]
+                ],
+                [
+                    "==",
+                    [
+                        "get",
+                        "status"
+                    ],
+                    "PLACED"
+                ]
+            ],
+            "layout": {
+                "visibility": "none",
+                "icon-allow-overlap": true,
+                "icon-overlap": "always",
+                "icon-ignore-placement": true,
+                "icon-image": [
+                    "step",
+                    [
+                        "zoom"
+                    ],
+                    [
+                        "concat",
+                        "custom:",
+                        [
+                            "get",
+                            "rvv_code"
+                        ],
+                        "_3"
+                    ],
+                    11,
+                    [
+                        "concat",
+                        "custom:",
+                        [
+                            "get",
+                            "rvv_code"
+                        ],
+                        "_3"
+                    ],
+                    13,
+                    [
+                        "concat",
+                        "custom:",
+                        [
+                            "get",
+                            "rvv_code"
+                        ],
+                        "_2"
+                    ],
+                    18,
+                    [
+                        "concat",
+                        "custom:",
+                        [
+                            "get",
+                            "rvv_code"
+                        ],
+                        "_1"
+                    ]
+                ],
+                "icon-rotation-alignment": "map",
+                "icon-rotate": [
+                    "get",
+                    "location_bearing"
+                ],
+                "icon-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    11,
+                    0.8,
+                    13,
+                    0.3,
+                    15,
+                    0.8,
+                    18,
+                    0.6,
+                    20,
+                    1
+                ]
+            },
+            "paint": {
+                "text-color": "#000"
+            }
+        },
+        {
+            "id": "NDW-trafficSigns-bereikbaarheidskaart-arrow",
+            "type": "symbol",
+            "source": "ndw_trafficSigns",
+            "source-layer": "traffic-signs",
+            "metadata": {
+                "group": "relevant-data",
+                "subGroup": "traffic-signs",
+                "type": "custom",
+                "legendName": "Zwarte pijl",
+                "desc": "Still in development",
+                "insertBefore": "label"
+            },
+            "minzoom": 11,
+            "filter": [
+                "all",
+                [
+                    "in",
+                    [
+                        "get",
+                        "rvv_code"
+                    ],
+                    [
+                        "literal",
+                        [
+                            "C1",
+                            "C2",
+                            "C3",
+                            "C6",
+                            "C12",
+                            "C17",
+                            "C18",
+                            "C19",
+                            "C20",
+                            "C21",
+                            "C22a",
+                            "C22b",
+                            "C7",
+                            "C7b",
+                            "C22c",
+                            "C22d"
+                        ]
+                    ]
+                ],
+                [
+                    "==",
+                    [
+                        "get",
+                        "status"
+                    ],
+                    "PLACED"
+                ]
+            ],
+            "layout": {
+                "visibility": "none",
+                "icon-allow-overlap": true,
+                "icon-overlap": "always",
+                "icon-ignore-placement": true,
+                "icon-image": "NDW:ndw-arrow-up",
+                "icon-rotation-alignment": "map",
+                "icon-rotate": [
+                    "get",
+                    "location_bearing"
+                ],
+                "icon-offset": [
+                    30,
+                    0
+                ],
+                "icon-size": [
+                    "interpolate",
+                    [
+                        "linear"
+                    ],
+                    [
+                        "zoom"
+                    ],
+                    11,
+                    0.8,
+                    13,
+                    0.3,
+                    15,
+                    0.8,
+                    18,
+                    0.6,
+                    20,
+                    1
+                ]
+            },
+            "paint": {
+                "text-color": "#000"
             }
         },
         {

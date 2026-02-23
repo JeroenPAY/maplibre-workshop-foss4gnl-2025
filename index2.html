@@ -14,12 +14,10 @@
       height: 100%;
       font-family: system-ui, sans-serif;
     }
-
     #map {
       width: 100%;
       height: 100%;
     }
-
     .controls {
       position: absolute;
       top: 10px;
@@ -30,14 +28,12 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       z-index: 1;
     }
-
     .controls label {
       font-weight: 600;
       font-size: 13px;
       display: block;
       margin-bottom: 4px;
     }
-
     .controls select,
     .controls input[type=range] {
       width: 220px;
@@ -64,11 +60,16 @@
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
-<script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+
+<!-- Include NDW stijlen als JS -->
+<script src="ndw-style.js"></script>
+<script src="demo-style.js"></script>
+
 <script>
+  // Styles object verwijst nu naar de ingeladen JS-variabelen
   const styles = {
-    ndw: "./ndw-style.json",
-    "ndw-demo": "./ndw-demo.json",
+    ndw: ndwStyle,
+    "ndw-demo": demoStyle,
     "pdok-luchtfoto": {
       version: 8,
       sources: {
@@ -111,7 +112,6 @@
   });
 
   const grayCheckbox = document.getElementById("grayNDW");
-
   function makeNDWGray() {
     const style = map.getStyle();
     if (!style || !style.layers) return;
