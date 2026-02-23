@@ -64,10 +64,11 @@
 </div>
 
 <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
 <script>
   const styles = {
-    ndw: "https://maps.ndw.nu/styles/ndw-basemap/dev/style.json",
-    "ndw-demo": "https://maps.ndw.nu/styles/ndw-basemap/dev/style_demo.json",
+    ndw: "./ndw-style.json",
+    "ndw-demo": "./ndw-demo.json",
     "pdok-luchtfoto": {
       version: 8,
       sources: {
@@ -104,47 +105,54 @@
 
   map.addControl(new maplibregl.NavigationControl(), "top-right");
 
-  // Kaartkeuze
   const select = document.getElementById("styleSelect");
   select.addEventListener("change", () => {
-    const selectedStyle = styles[select.value];
-    map.setStyle(selectedStyle);
+    map.setStyle(styles[select.value]);
   });
 
-  // NDW grijs/contrast functie
+  const grayCheckbox = document.getElementById("grayNDW");
+
   function makeNDWGray() {
-    map.getStyle().layers.forEach(layer => {
-      if(!map.getLayer(layer.id)) return;
-      if(layer.type === "fill" && map.getPaintProperty(layer.id,"fill-color")){
+    const style = map.getStyle();
+    if (!style || !style.layers) return;
+
+    style.layers.forEach(layer => {
+      if (!map.getLayer(layer.id)) return;
+
+      if (layer.type === "fill" && map.getPaintProperty(layer.id, "fill-color")) {
         map.setPaintProperty(layer.id, "fill-color", "#DDD");
       }
-      if(layer.type === "line" && map.getPaintProperty(layer.id,"line-color")){
+      if (layer.type === "line" && map.getPaintProperty(layer.id, "line-color")) {
         map.setPaintProperty(layer.id, "line-color", "#888");
       }
-      if(layer.type === "symbol"){
-        if(map.getPaintProperty(layer.id,"text-color")) map.setPaintProperty(layer.id,"text-color","#555");
-        if(map.getPaintProperty(layer.id,"icon-color")) map.setPaintProperty(layer.id,"icon-color","#555");
+      if (layer.type === "symbol") {
+        if (map.getPaintProperty(layer.id, "text-color"))
+          map.setPaintProperty(layer.id, "text-color", "#555");
+        if (map.getPaintProperty(layer.id, "icon-color"))
+          map.setPaintProperty(layer.id, "icon-color", "#555");
       }
     });
   }
 
-  const grayCheckbox = document.getElementById("grayNDW");
   grayCheckbox.addEventListener("change", e => {
-    if(e.target.checked){
+    if (e.target.checked) {
       makeNDWGray();
     } else {
-      // Reset naar originele stijl
       map.setStyle(styles[select.value]);
     }
   });
 
-  // Raster contrast slider voor PDOK luchtfoto
   const contrastSlider = document.getElementById("contrastRange");
   contrastSlider.addEventListener("input", () => {
     const value = parseFloat(contrastSlider.value);
-    map.getStyle().layers.forEach(layer => {
-      if(!map.getLayer(layer.id)) return;
-      if(layer.type === "raster"){
+
+    const style = map.getStyle();
+    if (!style || !style.layers) return;
+
+    style.layers.forEach(layer => {
+      if (!map.getLayer(layer.id)) return;
+
+      if (layer.type === "raster") {
         map.setPaintProperty(layer.id, "raster-brightness-max", value);
         map.setPaintProperty(layer.id, "raster-contrast", value - 1);
         map.setPaintProperty(layer.id, "raster-saturation", 1 - value);
